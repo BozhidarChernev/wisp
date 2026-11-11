@@ -19,7 +19,8 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 add_executable(Wisp
     src/main.cpp
 
- 
+    src/app/MainWindow.h
+    src/app/MainWindow.cpp
 )
 
 target_link_libraries(Wisp

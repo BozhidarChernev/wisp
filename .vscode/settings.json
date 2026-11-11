@@ -1,0 +1,7 @@
+{
+    "C_Cpp.default.includePath": [
+       "${workspaceFolder}/src",
+       "/usr/include/x86_64-linux-gnu/qt6/**"
+    ]
+}
+
