@@ -8,6 +8,9 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QDockWidget>
+#include <QFileSystemModel>
+#include <QTreeView>
 
 class MainWindow : public QMainWindow
 {
@@ -17,11 +20,18 @@ public:
 private:
     void NewFile();
     void OpenFile();
+    void OpenFolder();
     void SaveFile();
     void SaveFileAs();
 
     void WriteToFile(const QString &path);
+    void LoadFile(const QString &path);
+    void OpenFromTree(const QModelIndex &index);
 
     QPlainTextEdit editor;
     QString current_file;
+
+    QFileSystemModel filesys_model;
+    QDockWidget folder_dock;
+    QTreeView file_tree;
 };
