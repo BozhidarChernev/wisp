@@ -9,7 +9,6 @@ void CodeEditor::keyPressEvent(QKeyEvent *event)
     // auto indent
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) // Qt::Key_Return = numpad enter
     {
-
         QPlainTextEdit::keyPressEvent(event);
 
         QString prev_line_text = textCursor().block().previous().text();
