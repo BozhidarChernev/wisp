@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow()
 {
-    setWindowTitle("wisp - Nov 11 2026");
+    setWindowTitle("wisp - Nov 13 2026");
     resize(800, 600);
 
     QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);

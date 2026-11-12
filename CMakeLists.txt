@@ -21,6 +21,9 @@ add_executable(Wisp
 
     src/app/MainWindow.h
     src/app/MainWindow.cpp
+
+    src/editor/CodeEditor.h
+    src/editor/CodeEditor.cpp
 )
 
 target_link_libraries(Wisp

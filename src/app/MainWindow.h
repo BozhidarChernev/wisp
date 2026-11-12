@@ -12,6 +12,8 @@
 #include <QFileSystemModel>
 #include <QTreeView>
 
+#include "../editor/CodeEditor.h"
+
 class MainWindow : public QMainWindow
 {
 public:
@@ -28,7 +30,8 @@ private:
     void LoadFile(const QString &path);
     void OpenFromTree(const QModelIndex &index);
 
-    QPlainTextEdit editor;
+    // QPlainTextEdit editor;
+    CodeEditor editor;
     QString current_file;
 
     QFileSystemModel filesys_model;
