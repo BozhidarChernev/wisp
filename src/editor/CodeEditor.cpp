@@ -55,5 +55,23 @@ void CodeEditor::keyPressEvent(QKeyEvent *event)
         }
     }
 
+    // zoom in / zoom out
+    {
+        if (event->modifiers() == Qt::ControlModifier)
+        {
+            if (event->key() == Qt::Key_Plus || event->key() == Qt::Key_Equal)
+            {
+                zoomIn(5);
+                return;
+            }
+
+            if (event->key() == Qt::Key_Minus)
+            {
+                zoomOut(5);
+                return;
+            }
+        }
+    }
+
     QPlainTextEdit::keyPressEvent(event);
 }

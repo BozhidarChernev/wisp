@@ -1,8 +1,10 @@
 #include "MainWindow.h"
 
+QString title = "wisp - ";
+
 MainWindow::MainWindow()
 {
-    setWindowTitle("wisp - Nov 13 2026");
+    setWindowTitle(title + __DATE__);
     resize(800, 600);
 
     QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
@@ -44,8 +46,31 @@ MainWindow::MainWindow()
     folder_dock.hide();
 
     connect(&file_tree, &QTreeView::doubleClicked, this, &MainWindow::OpenFromTree);
+    connect(editor.document(), &QTextDocument::modificationChanged, this, &MainWindow::UpdateTitle);
 
     setCentralWidget(&editor);
+}
+
+void MainWindow::UpdateTitle()
+{
+    QString message = title;
+
+    if (current_file.isEmpty())
+        message += "empty";
+    else
+        message += current_file;
+
+    if (editor.document()->isModified())
+        message += " *";
+
+    setWindowTitle(message);
+}
+
+void MainWindow::SetCurrentPath(const QString &path)
+{
+    current_file = path;
+    editor.document()->setModified(false);
+    UpdateTitle();
 }
 
 void MainWindow::LoadFile(const QString &path)
@@ -70,8 +95,7 @@ void MainWindow::LoadFile(const QString &path)
     bool file_readonly = !QFileInfo(path).isWritable();
     editor.setReadOnly(file_readonly);
 
-    current_file = path;
-    setWindowTitle("wisp - " + path);
+    SetCurrentPath(path);
 }
 
 void MainWindow::OpenFromTree(const QModelIndex &index)
@@ -85,8 +109,8 @@ void MainWindow::OpenFromTree(const QModelIndex &index)
 void MainWindow::NewFile()
 {
     editor.clear();
-    current_file.clear();
-    setWindowTitle("wisp - empty");
+    editor.setReadOnly(false);
+    SetCurrentPath("");
 }
 
 void MainWindow::OpenFile()
@@ -145,6 +169,5 @@ void MainWindow::WriteToFile(const QString &path)
     QTextStream output(&file);
     output << editor.toPlainText();
 
-    current_file = path;
-    setWindowTitle("wisp - " + path);
+    SetCurrentPath(path);
 }

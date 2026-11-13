@@ -30,7 +30,9 @@ private:
     void LoadFile(const QString &path);
     void OpenFromTree(const QModelIndex &index);
 
-    // QPlainTextEdit editor;
+    void UpdateTitle();
+    void SetCurrentPath(const QString &path);
+
     CodeEditor editor;
     QString current_file;
 
